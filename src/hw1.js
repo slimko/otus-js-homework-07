@@ -27,11 +27,9 @@ export function lengthCharacters(a, b) {
 
 export function sumNumbers() {
   const number = prompt("Введите трехзначное число:");
-
   const result = number
     .split("")
-    .map((x) => Number(x))
+    .map((el) => +el)
     .reduce((first, next) => first + next);
-
   console.log(result);
 }

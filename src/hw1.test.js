@@ -1,108 +1,112 @@
 import { sum, multiplication, lengthCharacters, sumNumbers } from "./hw1";
 
 describe("sum()", () => {
-  const spy = jest.spyOn(console, "log");
-
+  let spy = "";
   beforeEach(() => {
-    sum(2, 2);
+    spy = jest.spyOn(console, "log");
   });
 
   afterEach(() => {
-    spy.mockReset();
+    spy.mockRestore();
   });
 
-  it("call console.log", () => {
-    expect(spy).toHaveBeenCalled();
+  it("is a function", () => {
+    expect(sum).toBeInstanceOf(Function);
   });
 
-  it("result sum", () => {
-    expect(spy).toHaveBeenCalledWith(4);
+  [
+    [1, 1, 2],
+    [6, 0, 6],
+    [-5, 2, -3],
+  ].forEach(([a, b, result]) => {
+    it(`the sum of ${a} and ${b} is ${result}`, () => {
+      sum(a, b);
+      expect(console.log).toHaveBeenCalledWith(result);
+    });
   });
 });
 
 describe("multiplication()", () => {
-  const spy = jest.spyOn(console, "log");
-
+  let spy = "";
   beforeEach(() => {
-    multiplication(2, 2);
+    spy = jest.spyOn(console, "log");
   });
 
   afterEach(() => {
-    spy.mockReset();
+    spy.mockRestore();
   });
 
-  it("call console.log", () => {
-    expect(spy).toHaveBeenCalled();
+  it("is a function", () => {
+    expect(multiplication).toBeInstanceOf(Function);
   });
 
-  it("result multiplication", () => {
-    expect(spy).toHaveBeenCalledWith(4);
-  });
-});
-
-describe("multiplication()", () => {
-  const spy = jest.spyOn(console, "log");
-
-  beforeEach(() => {
-    multiplication(2, 2);
-  });
-
-  afterEach(() => {
-    spy.mockReset();
-  });
-
-  it("call console.log", () => {
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it("result multiplication", () => {
-    expect(spy).toHaveBeenCalledWith(4);
+  [
+    [1, 1, 1],
+    [6, 0, 0],
+    [-5, 2, -10],
+  ].forEach(([a, b, result]) => {
+    it(`the result of multiplying ${a} by ${b} is ${result}`, () => {
+      multiplication(a, b);
+      expect(console.log).toHaveBeenCalledWith(result);
+    });
   });
 });
 
 describe("outputs the length of characters", () => {
-  const spy = jest.spyOn(console, "log");
-
+  let spy = "";
   beforeEach(() => {
-    lengthCharacters("2", "2");
+    spy = jest.spyOn(console, "log");
   });
 
   afterEach(() => {
-    spy.mockReset();
+    spy.mockRestore();
   });
 
-  it("call console.log", () => {
-    expect(spy).toHaveBeenCalled();
+  it("is a function", () => {
+    expect(lengthCharacters).toBeInstanceOf(Function);
   });
 
-  it("result lengthCharacters()", () => {
-    expect(spy).toHaveBeenCalledWith(2);
+  [
+    ["Ivan", "Nadya", 9],
+    ["anton", "mouse", 10],
+    ["string", "12345678", 14],
+  ].forEach(([a, b, result]) => {
+    it(`the result of multiplying ${a} by ${b} is ${result}`, () => {
+      lengthCharacters(a, b);
+      expect(console.log).toHaveBeenCalledWith(result);
+    });
   });
 });
 
 describe("the sum of the digits of the entered number", () => {
-  const windowPrompt = jest.spyOn(window, "prompt");
-  const spy = jest.spyOn(console, "log");
-
+  let spy = "";
   beforeEach(() => {
-    windowPrompt.mockImplementation(() => "111");
-    sumNumbers();
+    spy = jest.spyOn(console, "log");
   });
 
   afterEach(() => {
-    spy.mockReset();
-    windowPrompt.mockReset();
+    spy.mockRestore();
+  });
+
+  it("is a function", () => {
+    expect(lengthCharacters).toBeInstanceOf(Function);
   });
 
   it("call prompt()", () => {
-    expect(windowPrompt).toHaveBeenCalled();
+    jest.spyOn(window, "prompt").mockReturnValue("111");
+    sumNumbers();
+    expect(window.prompt).toHaveBeenCalled();
   });
 
-  it("call console.log", () => {
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it("result sumNumbers()", () => {
-    expect(spy).toHaveBeenCalledWith(3);
+  [
+    ["123", 6],
+    ["111", 3],
+    ["345", 12],
+  ].forEach(([a, result]) => {
+    it(`the sum of the digits of the number ${a} is ${result}`, () => {
+      jest.spyOn(window, "prompt").mockReturnValue(`${a}`);
+      sumNumbers();
+      expect(console.log).toHaveBeenCalledWith(result);
+    });
   });
 });
