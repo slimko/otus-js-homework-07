@@ -15,6 +15,7 @@ module.exports = {
     "no-prompt": "off",
     "no-alert": "off",
     "no-plusplus": "off",
+    "no-param-reassign": ["error", { props: false }],
     "max-len": [
       "error",
       {
